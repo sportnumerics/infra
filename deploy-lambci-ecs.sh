@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -e
+
+aws cloudformation deploy --stack-name lambci --template-file ecs.ci.template.json --capabilities CAPABILITY_NAMED_IAM
