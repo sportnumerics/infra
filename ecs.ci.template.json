@@ -7,6 +7,11 @@
       "Type": "String",
       "Default": "t2.micro",
       "ConstraintDescription": "must be a valid EC2 instance type."
+    },
+    "DesiredInstanceCapacity": {
+      "Description": "Number of instances in the cluster",
+      "Type": "Number",
+      "Default": 1
     }
   },
   "Mappings": {
@@ -53,7 +58,9 @@
       "Properties": {
         "AvailabilityZones": {"Fn::GetAZs": ""},
         "LaunchConfigurationName": {"Ref": "LaunchConfig"},
-        "DesiredCapacity": "1",
+        "DesiredCapacity": {
+          "Ref": "DesiredInstanceCapacity"
+        },
         "MinSize": "0",
         "MaxSize": "4"
       },

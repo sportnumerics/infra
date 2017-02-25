@@ -2,4 +2,4 @@
 
 set -e
 
-aws cloudformation deploy --stack-name lambci --template-file ecs.ci.template.json --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation deploy --stack-name lambci-ecs --template-file ecs.ci.template.json --capabilities CAPABILITY_NAMED_IAM
