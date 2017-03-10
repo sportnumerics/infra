@@ -70,6 +70,33 @@
         }
       }
     },
+    "ScaleOffPolicy" : {
+       "Type" : "AWS::AutoScaling::ScalingPolicy",
+       "Properties" : {
+          "AdjustmentType" : "ExactCapacity",
+          "AutoScalingGroupName" : { "Ref" : "AutoScalingGroup" },
+          "Cooldown" : "1",
+          "ScalingAdjustment" : "0"
+       }
+    },
+    "CPUUnderutilizedAlarm": {
+       "Type": "AWS::CloudWatch::Alarm",
+       "Properties": {
+          "EvaluationPeriods": "1",
+          "Statistic": "Maximum",
+          "Threshold": "5",
+          "AlarmDescription": "Alarm if CPU is never above 5% in an hour",
+          "Period": "3600",
+          "AlarmActions": [ { "Ref": "ScaleOffPolicy" } ],
+          "Namespace": "AWS/EC2",
+          "Dimensions": [ {
+             "Name": "AutoScalingGroupName",
+             "Value": { "Ref": "AutoScalingGroup" }
+          } ],
+          "ComparisonOperator": "LessThanOrEqualToThreshold",
+          "MetricName": "CPUUtilization"
+       }
+    },
     "LaunchConfig": {
       "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Properties": {
