@@ -6,6 +6,8 @@ set -e
 source ./config/env.sh
 unset AWS_SESSION_TOKEN
 
+virtualenv env
+source env/bin/activate
 pip install awscli
 
 REPOS="sportnumerics/infra,sportnumerics/stats,sportnumerics/predict,sportnumerics/explorer-api,sportnumerics/explorer"
