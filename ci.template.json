@@ -282,6 +282,15 @@
                         }
                     }
                 }, {
+                    "PolicyName": "ScaleEcsCluster",
+                    "PolicyDocument": {
+                        "Statement": {
+                            "Effect": "Allow",
+                            "Action": "autoscaling:SetDesiredCapacity",
+                            "Resource": { "Ref": "AutoScalingGroup" }
+                        }
+                    }
+                }, {
                     "PolicyName": "WriteLogs",
                     "PolicyDocument": {
                         "Statement": {
@@ -732,7 +741,7 @@
             }
         },
         "AutoScalingGroupName": {
-            "Description": "Autoscaling group of prediction cluster",
+            "Description": "Autoscaling group of lambci cluster",
             "Value": {
                 "Ref": "AutoScalingGroup"
             }
