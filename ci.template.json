@@ -282,6 +282,22 @@
                         }
                     }
                 }, {
+                    "PolicyName": "DescribeEcsCluster",
+                    "PolicyDocument": {
+                        "Statement": {
+                            "Effect": "Allow",
+                            "Action": "ecs:DescribeCluster",
+                            "Resource": {
+                                "Fn::Join": [
+                                    "", [
+                                        "arn:aws:ecs:*:*:cluster/",
+                                        { "Ref": "Cluster" }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }, {
                     "PolicyName": "ScaleEcsCluster",
                     "PolicyDocument": {
                         "Statement": {
