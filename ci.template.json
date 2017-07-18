@@ -287,7 +287,14 @@
                         "Statement": {
                             "Effect": "Allow",
                             "Action": "autoscaling:SetDesiredCapacity",
-                            "Resource": { "Ref": "AutoScalingGroup" }
+                            "Resource": {
+                                "Fn::Join": [
+                                    "", [
+                                        "arn:aws:autoscaling:*:*:autoScalingGroup:*:autoScalingGroupName/",
+                                        { "Ref": "AutoScalingGroup" }
+                                    ]
+                                ]
+                            }
                         }
                     }
                 }, {
