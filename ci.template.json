@@ -286,7 +286,7 @@
                     "PolicyDocument": {
                         "Statement": {
                             "Effect": "Allow",
-                            "Action": "ecs:DescribeCluster",
+                            "Action": "ecs:DescribeClusters",
                             "Resource": {
                                 "Fn::Join": [
                                     "", [
