@@ -43,28 +43,31 @@
     "Mappings": {
         "EcsAmisByRegion": {
             "us-east-1": {
-                "ami": "ami-b2df2ca4"
+                "ami": "ami-a7a242da"
+            },
+            "us-east-2": {
+                "ami": "ami-b86a5ddd"
             },
             "us-west-1": {
-                "ami": "ami-dd104dbd"
+                "ami": "ami-9ad4dcfa"
             },
             "us-west-2": {
-                "ami": "ami-022b9262"
+                "ami": "ami-92e06fea"
             },
             "eu-west-1": {
-                "ami": "ami-a7f2acc1"
+                "ami": "ami-0693ed7f"
             },
             "eu-central-1": {
-                "ami": "ami-ec2be583"
+                "ami": "ami-0799fa68"
             },
             "ap-northeast-1": {
-                "ami": "ami-c393d6a4"
+                "ami": "ami-68ef940e"
             },
             "ap-southeast-1": {
-                "ami": "ami-a88530cb"
+                "ami": "ami-0a622c76"
             },
             "ap-southeast-2": {
-                "ami": "ami-8af8ffe9"
+                "ami": "ami-ee884f8c"
             }
         }
     },
