@@ -103,6 +103,27 @@ Resources:
               - !Sub arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${BuildsTable}/index/*
         - LambdaInvokePolicy:
             FunctionName: !Sub ${AWS::StackName}-build
+        - Statement:
+            Effect: Allow
+            Action: ecs:RunTask
+            Resource:
+              Ref: BuildTask
+        - Statement:
+            Effect: Allow
+            Action: ecs:DescribeClusters
+            Resource:
+              Fn::Join:
+              - ''
+              - - arn:aws:ecs:*:*:cluster/
+                - Ref: Cluster
+        - Statement:
+            Effect: Allow
+            Action: autoscaling:SetDesiredCapacity
+            Resource:
+              Fn::Join:
+              - ''
+              - - arn:aws:autoscaling:*:*:autoScalingGroup:*:autoScalingGroupName/
+                - Ref: AutoScalingGroup
         # Uncomment this if you've added an SNS topic to publish to (above)
         # - SNSPublishMessagePolicy:
             # TopicName: !Ref StatusTopic
