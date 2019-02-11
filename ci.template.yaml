@@ -355,3 +355,8 @@ Outputs:
   WebhookUrl:
     Description: GitHub webhook URL
     Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/lambci/webhook
+
+  AutoScalingGroupName:
+    Description: Autoscaling group of lambci cluster
+    Value:
+      Ref: AutoScalingGroup
