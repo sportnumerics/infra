@@ -108,14 +108,6 @@ Resources:
             Action: ecs:RunTask
             Resource:
               Ref: BuildTask
-        - Statement:
-            Effect: Allow
-            Action: ecs:DescribeClusters
-            Resource:
-              Fn::Join:
-              - ''
-              - - arn:aws:ecs:*:*:cluster/
-                - Ref: Cluster
         # Uncomment this if you've added an SNS topic to publish to (above)
         # - SNSPublishMessagePolicy:
             # TopicName: !Ref StatusTopic
@@ -230,6 +222,34 @@ Resources:
       Cpu: 256
       RequiresCompatibilities:
       - FARGATE
+      ExecutionRoleArn:
+        Ref: TaskExecutionRole
+      NetworkMode: awsvpc
+
+  TaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ecs-tasks.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - PolicyName: TaskExecutionRole
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - 'ecr:GetAuthorizationToken'
+                  - 'ecr:BatchCheckLayerAvailability'
+                  - 'ecr:GetDownloadUrlForLayer'
+                  - 'ecr:BatchGetImage'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource: '*'
 
   EcsLogs:
     Type: AWS::Logs::LogGroup
