@@ -62,11 +62,10 @@ Mappings:
 
 Resources:
 
-  # Uncomment this (and permissions below) to add an SNS topic to publish build statuses to:
-  # StatusTopic:
-    # Type: AWS::SNS::Topic
-    # Properties:
-      # DisplayName: LambCI
+  LambciDeploymentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: sportnumerics-lambci
 
   BuildLambda:
     Type: AWS::Serverless::Function
