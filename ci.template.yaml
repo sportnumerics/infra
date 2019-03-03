@@ -346,8 +346,8 @@ Resources:
 
   SportnumericsDeploymentRole:
     Type: AWS::IAM::Role
-    RoleName: sportnumerics-deployment-role
     Properties:
+      RoleName: sportnumerics-deployment-role
       AssumeRolePolicyDocument:
         Statement:
           Effect: Allow
