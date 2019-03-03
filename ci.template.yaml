@@ -62,11 +62,6 @@ Mappings:
 
 Resources:
 
-  LambciDeploymentBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: sportnumerics-lambci
-
   BuildLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -344,6 +339,41 @@ Resources:
             - logs:PutLogEvents
             Resource: "*"
 
+  LambciDeploymentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: sportnumerics-lambci
+
+  SportnumericsDeploymentRole:
+    Type: AWS::IAM::Role
+    RoleName: sportnumerics-deployment-role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          Effect: Allow
+          Principal:
+            AWS:
+              Ref: BuildLambdaRole
+              Ref: InstanceRole
+      Policies:
+      - PolicyName: S3Admin
+        PolicyDocument:
+          Statement:
+            Effect: Allow
+            Action: "s3:*"
+            Resource: "arn:aws:s3:::*/*"
+      - PolicyName: CloudfrontAdmin
+        PolicyDocument:
+          Statement:
+            Effect: Allow
+            Action: "cloudfront:*"
+            Resource: "arn:aws:cloudfront::*:*"
+      - PolicyName: CloudFormationAdmin
+        PolicyDocument:
+          Statement:
+            Effect: Allow
+            Action: "cloudformation:*"
+            Action: "arn:aws:cloudformation:*:*:*"
 
 Outputs:
 
