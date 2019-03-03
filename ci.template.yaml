@@ -355,6 +355,7 @@ Resources:
             AWS:
               Ref: BuildLambdaRole
               Ref: InstanceRole
+          Action: sts:AssumeRole
       Policies:
       - PolicyName: S3Admin
         PolicyDocument:
@@ -373,7 +374,7 @@ Resources:
           Statement:
             Effect: Allow
             Action: "cloudformation:*"
-            Action: "arn:aws:cloudformation:*:*:*"
+            Resource: "arn:aws:cloudformation:*:*:*"
 
 Outputs:
 
