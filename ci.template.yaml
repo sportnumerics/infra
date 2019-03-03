@@ -353,8 +353,8 @@ Resources:
           Effect: Allow
           Principal:
             AWS:
-              Ref: BuildLambdaRole
-              Ref: InstanceRole
+              Fn::GetAtt: [BuildLambdaRole, Arn]
+              Fn::GetAtt: [InstanceRole, Arn]
           Action: sts:AssumeRole
       Policies:
       - PolicyName: S3Admin
