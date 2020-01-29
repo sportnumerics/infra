@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "lambci": "^0.11.2"
+  }
+}
