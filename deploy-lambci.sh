@@ -27,13 +27,13 @@ TASK=$(
     --output text
   )
 
-DOCKER_PROJECTS=( "gh/sportnumerics/stats" )
+DOCKER_PROJECTS=( "gh/sportnumerics/stats", "gh/sportnumerics/explorer" )
 
 for PROJECT in "${DOCKER_PROJECTS[@]}"
 do
   echo "Updating configuration for $PROJECT"
   lambci config --project $PROJECT docker.autoscalingGroup $AUTOSCALING_GROUP_NAME
   lambci config --project $PROJECT docker.cluster $CLUSTER
-  lambci config --project $PROJECT docker.task "${TASK}:1"
+  lambci config --project $PROJECT docker.task $TASK
   lambci config --project $PROJECT docker.runArgs "-v /var/run/docker.sock:/var/run/docker.sock --ulimit nofile=262144:262144"
 done
