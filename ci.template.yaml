@@ -363,6 +363,7 @@ Resources:
       Description: Required permissions for deploying sportnumerics
       ManagedPolicyName: SportnumericsDeploymentPolicy
       PolicyDocument:
+        Version: 2012-10-17
         Statement:
         - Effect: Allow
           Action: "s3:*"
