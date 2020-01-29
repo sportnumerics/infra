@@ -133,7 +133,7 @@ Resources:
               - ''
               - - arn:aws:autoscaling:*:*:autoScalingGroup:*:autoScalingGroupName/
                 - Ref: AutoScalingGroup
-        - SportnumericsDeploymentPolicy
+        - !Ref SportnumericsDeploymentPolicy
         # Uncomment this if you've added an SNS topic to publish to (above)
         # - SNSPublishMessagePolicy:
             # TopicName: !Ref StatusTopic
