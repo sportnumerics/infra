@@ -361,7 +361,6 @@ Resources:
     Type: AWS::IAM::ManagedPolicy
     Properties:
       Description: Required permissions for deploying sportnumerics
-      ManagedPolicyName: SportnumericsDeploymentPolicy
       PolicyDocument:
         Version: 2012-10-17
         Statement:
