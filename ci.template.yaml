@@ -80,7 +80,7 @@ Resources:
       FunctionName: !Sub ${AWS::StackName}-build
       Description: !Sub 'LambCI build function for stack: ${AWS::StackName}'
       Runtime: provided
-      CodeUri: build/lambda.zip
+      CodeUri: {Bucket: {'Fn::Sub': 'lambci-${AWS::Region}'}, Key: fn/lambci-build-0.11.2.zip}
       Handler: index.handler
       Timeout: 900
       MemorySize: 3008
