@@ -27,7 +27,7 @@ TASK=$(
     --output text
   )
 
-DOCKER_PROJECTS=( "gh/sportnumerics/stats", "gh/sportnumerics/explorer" )
+DOCKER_PROJECTS=( "gh/sportnumerics/stats" "gh/sportnumerics/explorer" )
 
 for PROJECT in "${DOCKER_PROJECTS[@]}"
 do
