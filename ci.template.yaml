@@ -14,6 +14,18 @@ Metadata:
         Parameters:
           - SlackToken
           - SlackChannel
+  AWS::ServerlessRepo::Application:
+    Name: lambci
+    Description: A continuous integration system built on AWS Lambda
+    Author: LambCI
+    SpdxLicenseId: MIT
+    LicenseUrl: LICENSE
+    ReadmeUrl: README-SAR.md
+    Labels: ['continuous-integration', 'ci', 'git', 'github', 'build', 'lambda', 'lambci']
+    HomePageUrl: https://github.com/lambci/lambci
+    SemanticVersion: 0.11.2
+    SourceCodeUrl: https://github.com/lambci/lambci/tree/v0.11.2
+
 Parameters:
   GithubToken:
     Description: GitHub OAuth token
@@ -67,11 +79,14 @@ Resources:
     Properties:
       FunctionName: !Sub ${AWS::StackName}-build
       Description: !Sub 'LambCI build function for stack: ${AWS::StackName}'
-      Runtime: nodejs8.10
-      CodeUri: {Bucket: {'Fn::Sub': 'lambci-${AWS::Region}'}, Key: fn/lambci-build-0.10.0.zip}
+      Runtime: provided
+      CodeUri: build/lambda.zip
       Handler: index.handler
       Timeout: 900
       MemorySize: 3008
+      Layers:
+        - !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:553035198032:layer:lambci-base:13
+        - !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:553035198032:layer:gcc72-lambda1:4
       Events:
         Webhook:
           Type: Api
@@ -118,6 +133,7 @@ Resources:
               - ''
               - - arn:aws:autoscaling:*:*:autoScalingGroup:*:autoScalingGroupName/
                 - Ref: AutoScalingGroup
+        - SportnumericsDeploymentPolicy
         # Uncomment this if you've added an SNS topic to publish to (above)
         # - SNSPublishMessagePolicy:
             # TopicName: !Ref StatusTopic
@@ -132,14 +148,12 @@ Resources:
       PrimaryKey:
         Name: project
         Type: String
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
 
   BuildsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: !Sub ${AWS::StackName}-builds
+      BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         - AttributeName: project
           AttributeType: S
@@ -156,9 +170,6 @@ Resources:
           KeyType: HASH
         - AttributeName: buildNum
           KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
       LocalSecondaryIndexes:
         - IndexName: trigger
           KeySchema:
@@ -338,43 +349,30 @@ Resources:
             - logs:CreateLogStream
             - logs:PutLogEvents
             Resource: "*"
+      ManagedPolicyArns:
+      - !Ref SportnumericsDeploymentPolicy
 
   LambciDeploymentBucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: sportnumerics-lambci
 
-  SportnumericsDeploymentRole:
-    Type: AWS::IAM::Role
+  SportnumericsDeploymentPolicy:
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      RoleName: sportnumerics-deployment-role
-      AssumeRolePolicyDocument:
+      Description: Required permissions for deploying sportnumerics
+      ManagedPolicyName: SportnumericsDeploymentPolicy
+      PolicyDocument:
         Statement:
-          Effect: Allow
-          Principal:
-            AWS:
-              Fn::GetAtt: [BuildLambdaRole, Arn]
-              Fn::GetAtt: [InstanceRole, Arn]
-          Action: sts:AssumeRole
-      Policies:
-      - PolicyName: S3Admin
-        PolicyDocument:
-          Statement:
-            Effect: Allow
-            Action: "s3:*"
-            Resource: "arn:aws:s3:::*/*"
-      - PolicyName: CloudfrontAdmin
-        PolicyDocument:
-          Statement:
-            Effect: Allow
-            Action: "cloudfront:*"
-            Resource: "arn:aws:cloudfront::*:*"
-      - PolicyName: CloudFormationAdmin
-        PolicyDocument:
-          Statement:
-            Effect: Allow
-            Action: "cloudformation:*"
-            Resource: "arn:aws:cloudformation:*:*:*"
+        - Effect: Allow
+          Action: "s3:*"
+          Resource: "arn:aws:s3:::*/*"
+        - Effect: Allow
+          Action: "cloudfront:*"
+          Resource: "arn:aws:cloudfront::*:*"
+        - Effect: Allow
+          Action: "cloudformation:*"
+          Resource: "arn:aws:cloudformation:*:*:*"
 
 Outputs:
 
