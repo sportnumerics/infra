@@ -385,3 +385,13 @@ Outputs:
     Description: Autoscaling group of lambci cluster
     Value:
       Ref: AutoScalingGroup
+
+  Cluster:
+    Description: ECS Cluster for running dockerized builds
+    Value:
+      Ref: Cluster
+
+  Task:
+    Description: ECS Task for dockerized builds
+    Value:
+      Ref: BuildTask
