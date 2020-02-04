@@ -27,7 +27,7 @@ TASK=$(
     --output text
   )
 
-DOCKER_PROJECTS=( "gh/sportnumerics/stats" "gh/sportnumerics/explorer" )
+DOCKER_PROJECTS=( "gh/sportnumerics/stats" "gh/sportnumerics/explorer" "gh/sportnumerics/predict" )
 
 for PROJECT in "${DOCKER_PROJECTS[@]}"
 do
@@ -37,3 +37,5 @@ do
   lambci config --project $PROJECT docker.task $TASK
   lambci config --project $PROJECT docker.runArgs "-v /var/run/docker.sock:/var/run/docker.sock --ulimit nofile=262144:262144"
 done
+
+lambci config secretEnv.AWS_DEFAULT_REGION "us-east-1"

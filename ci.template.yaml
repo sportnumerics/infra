@@ -60,17 +60,10 @@ Parameters:
 
 Mappings:
   EcsAmisByRegion:
-    us-east-1: {"ami": "ami-275ffe31"}
-    us-east-2: {"ami": "ami-62745007"}
-    us-west-1: {"ami": "ami-689bc208"}
-    us-west-2: {"ami": "ami-62d35c02"}
-    eu-west-1: {"ami": "ami-95f8d2f3"}
-    eu-west-2: {"ami": "ami-bf9481db"}
-    eu-central-1: {"ami": "ami-085e8a67"}
-    ap-northeast-1: {"ami": "ami-f63f6f91"}
-    ap-southeast-1: {"ami": "ami-b4ae1dd7"}
-    ap-southeast-2: {"ami": "ami-fbe9eb98"}
-    ca-central-1: {"ami": "ami-ee58e58a"}
+    us-east-1: {"ami": "ami-07a63940735aebd38"}
+    us-east-2: {"ami": "ami-035ad8e6117e5fde5"}
+    us-west-1: {"ami": "ami-007514705f2ca0792"}
+    us-west-2: {"ami": "ami-05f4cc9df35a4ad8a"}
 
 Resources:
 
@@ -364,6 +357,9 @@ Resources:
         - Effect: Allow
           Action: "s3:*"
           Resource: "arn:aws:s3:::*/*"
+        - Effect: Allow
+          Action: "s3:*"
+          Resource: "arn:aws:s3:::*"
         - Effect: Allow
           Action: "cloudfront:*"
           Resource: "arn:aws:cloudfront::*:*"
