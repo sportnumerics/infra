@@ -366,6 +366,15 @@ Resources:
         - Effect: Allow
           Action: "iam:*"
           Resource: "*"
+        - Effect: Allow
+          Action: "lambda:*"
+          Resource: "*"
+        - Effect: Allow
+          Action: "ecs:*"
+          Resource: "*"
+        - Effect: Allow
+          Action: "ecr:*"
+          Resource: "*"
 
 Outputs:
 
