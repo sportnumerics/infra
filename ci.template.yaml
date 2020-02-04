@@ -356,16 +356,13 @@ Resources:
         Statement:
         - Effect: Allow
           Action: "s3:*"
-          Resource: "arn:aws:s3:::*/*"
-        - Effect: Allow
-          Action: "s3:*"
-          Resource: "arn:aws:s3:::*"
+          Resource: "*"
         - Effect: Allow
           Action: "cloudfront:*"
-          Resource: "arn:aws:cloudfront::*:*"
+          Resource: "*"
         - Effect: Allow
           Action: "cloudformation:*"
-          Resource: "arn:aws:cloudformation:*:*:*"
+          Resource: "*"
 
 Outputs:
 
