@@ -375,6 +375,9 @@ Resources:
         - Effect: Allow
           Action: "ecr:*"
           Resource: "*"
+        - Effect: Allow
+          Action: "apigateway:*"
+          Resource: "*"
 
 Outputs:
 
