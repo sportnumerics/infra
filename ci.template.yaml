@@ -378,6 +378,9 @@ Resources:
         - Effect: Allow
           Action: "apigateway:*"
           Resource: "*"
+        - Effect: Allow
+          Action: "logs:CreateLogGroup"
+          Resource: "*"
 
 Outputs:
 
