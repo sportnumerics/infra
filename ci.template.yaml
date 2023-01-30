@@ -364,10 +364,8 @@ Resources:
           - "ecs:*"
           - "ecr:*"
           - "apigateway:*"
-          - "logs:CreateLogGroup"
-          - "events:PutRule"
-          - "events:DescribeRule"
-          - "events:PutTargets"
+          - "logs:*"
+          - "events:*"
           Resource: "*"
 
 Outputs:
