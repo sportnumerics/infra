@@ -367,6 +367,7 @@ Resources:
           - "logs:CreateLogGroup"
           - "events:PutRule"
           - "events:DescribeRule"
+          - "events:PutTargets"
           Resource: "*"
 
 Outputs:
