@@ -355,34 +355,18 @@ Resources:
         Version: 2012-10-17
         Statement:
         - Effect: Allow
-          Action: "s3:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "cloudfront:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "cloudformation:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "iam:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "lambda:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "ecs:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "ecr:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "apigateway:*"
-          Resource: "*"
-        - Effect: Allow
-          Action: "logs:CreateLogGroup"
-          Resource: "*"
-        - Effect: Allow
-          Action: "events:PutRule"
+          Action:
+          - "s3:*"
+          - "cloudfront:*"
+          - "cloudformation:*"
+          - "iam:*"
+          - "lambda:*"
+          - "ecs:*"
+          - "ecr:*"
+          - "apigateway:*"
+          - "logs:CreateLogGroup"
+          - "events:PutRule"
+          - "events:DescribeRule"
           Resource: "*"
 
 Outputs:
